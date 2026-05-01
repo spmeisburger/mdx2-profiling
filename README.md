@@ -1,4 +1,4 @@
-# regression_tests
+# mdx2-profiling
 
 Small regression/profiling scripts for mdx2 and dials workflows.
 
@@ -11,8 +11,6 @@ Small regression/profiling scripts for mdx2 and dials workflows.
   - `data/`
   - `processed_data/`
 
-These scripts now derive paths from each script location, so they work from any clone path and any current working directory.
-
 ## Expected layout
 
 - `data/insulin_2_1_10deg/...`
@@ -21,7 +19,7 @@ These scripts now derive paths from each script location, so they work from any 
 - `processed_data/insulin_mdx2_dev/...`
 - `processed_data/mac1_1_mdx2_1_0_3/...`
 
-## Smoke tests
+## Examples
 
 From this directory:
 
