@@ -1,5 +1,12 @@
-#!/bin/env/bash
+#!/usr/bin/env bash
 set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
+DATA_DIR="${ROOT_DIR}/data"
+MAC1_DIR="${DATA_DIR}/mac1_1_10deg"
+
+[[ -d "$MAC1_DIR" ]] || { echo "Error: missing data directory: $MAC1_DIR" >&2; exit 1; }
 
 # settings
 nproc=4
@@ -30,8 +37,8 @@ fi
 cd $proc_dir
 
 # run DIALS to get the geometry
-dials.import "/Users/steve/dev/mdx2_tests/regression_tests/data/mac1_1_10deg/mac1_1_4796_master.h5" image_range=1,100
-dials.import "/Users/steve/dev/mdx2_tests/regression_tests/data/mac1_1_10deg/mac1_1_bg_4797_master.h5" image_range=1,10 output.experiments=background.expt
+dials.import "$MAC1_DIR/mac1_1_4796_master.h5" image_range=1,100
+dials.import "$MAC1_DIR/mac1_1_bg_4797_master.h5" image_range=1,10 output.experiments=background.expt
 dials.find_spots imported.expt nproc=$nproc
 dials.index imported.expt strong.refl space_group=P43
 

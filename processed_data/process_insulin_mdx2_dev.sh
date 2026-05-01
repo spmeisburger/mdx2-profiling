@@ -1,5 +1,12 @@
-#!/bin/env/bash
+#!/usr/bin/env bash
 set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
+DATA_DIR="${ROOT_DIR}/data"
+INSULIN_DIR="${DATA_DIR}/insulin_2_1_10deg"
+
+[[ -d "$INSULIN_DIR" ]] || { echo "Error: missing data directory: $INSULIN_DIR" >&2; exit 1; }
 
 # settings
 nproc=4
@@ -22,8 +29,8 @@ fi
 cd $proc_dir
 
 # run DIALS to get the geometry
-dials.import "/Users/steve/dev/mdx2_tests/regression_tests/data/insulin_2_1_10deg/insulin_2_1_*.cbf"
-#dials.import "/Users/steve/dev/mdx2_tests/regression_tests/data/insulin_2_1_10deg/insulin_2_bkg_1_*.cbf" output.experiments=background.expt
+dials.import "$INSULIN_DIR/insulin_2_1_*.cbf"
+#dials.import "$INSULIN_DIR/insulin_2_bkg_1_*.cbf" output.experiments=background.expt
 dials.find_spots imported.expt nproc=$nproc
 dials.index imported.expt strong.refl space_group=I213
 

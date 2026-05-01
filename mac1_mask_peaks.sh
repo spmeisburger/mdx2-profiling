@@ -1,7 +1,10 @@
-#!/bin/env/bash
+#!/usr/bin/env bash
 set -e
 
-processed_data_dir='/Users/steve/dev/mdx2_tests/regression_tests/processed_data'
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+processed_data_dir="${SCRIPT_DIR}/processed_data"
+
+[[ -d "$processed_data_dir" ]] || { echo "Error: missing processed_data directory: $processed_data_dir" >&2; exit 1; }
 
 ln -s "$processed_data_dir/mac1_1_mdx2_1_0_3/datastore" datastore
 

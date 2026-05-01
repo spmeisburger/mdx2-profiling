@@ -1,10 +1,13 @@
-#!/bin/env/bash
+#!/usr/bin/env bash
 set -e
 
 # Same as insulin.integrate.sh, but labeled so that
 # it's clear it was run using a feature branch of mdx2.
 
-processed_data_dir='/Users/steve/dev/mdx2_tests/regression_tests/processed_data/insulin_mdx2_dev'
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+processed_data_dir="${SCRIPT_DIR}/processed_data/insulin_mdx2_dev"
+
+[[ -d "$processed_data_dir" ]] || { echo "Error: missing processed dataset: $processed_data_dir" >&2; exit 1; }
 
 ln -s "$processed_data_dir/datastore" datastore
 
